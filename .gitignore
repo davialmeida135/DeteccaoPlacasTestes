@@ -1,0 +1,5 @@
+.venv
+data
+Characters_South_America.v2i.yolov9
+runs
+*.zip
