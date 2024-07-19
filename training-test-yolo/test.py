@@ -4,7 +4,7 @@ import cv2
 
 # Load the saved model
 script_dir = os.path.dirname(__file__)
-model_path = os.path.join(script_dir, "../runs/detect/train/weights/best.pt")
+model_path = os.path.join(script_dir, "../runs/detect/train7/weights/best.pt")
 model = YOLO(model_path)
 
 test_images_dir = os.path.join(script_dir, "../Characters_South_America.v2i.yolov9/test/images")
@@ -31,12 +31,13 @@ for img_path in test_images:
     for result in results:
         if hasattr(result, 'boxes'):
             boxes = result.boxes  # Get the bounding boxes
-            for box in boxes:
+            sorted_boxes = sorted(boxes, key=lambda box: box.xyxy[0][0])
+            for box in sorted_boxes:
                 x1, y1, x2, y2 = map(int, box.xyxy[0])  # Convert to integer coordinates
                 confidence = box.conf[0]
                 class_id = box.cls[0]
-                label = f'{model.names[class_id]} {confidence:.2f}'
-                print("Label:",label)
+                label = f'{model.names[int(class_id)]} {confidence:.2f}'
+                print("Label:",label, "x1:",x1,)
 
                 # Draw the bounding box
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
