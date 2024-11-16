@@ -4,10 +4,11 @@ import cv2
 
 # Load the saved model
 script_dir = os.path.dirname(__file__)
-model_path = os.path.join(script_dir, "../runs/detect/train7/weights/best.pt")
+model_path = os.path.join(script_dir, "../runs/detect/train3/weights/best.pt")
 model = YOLO(model_path)
 
-test_images_dir = os.path.join(script_dir, "../Characters_South_America.v2i.yolov9/test/images")
+#test_images_dir = os.path.join(script_dir, "../Characters_South_America.v2i.yolov9/test/images")
+test_images_dir = os.path.join(script_dir, "../testimages")
 output_dir = os.path.join(script_dir, "../Characters_South_America.v2i.yolov9/test/output")
 os.makedirs(output_dir, exist_ok=True)
 
@@ -17,12 +18,12 @@ test_images = [os.path.join(test_images_dir, img) for img in os.listdir(test_ima
 # Run predictions and save results
 for img_path in test_images:
     # Run prediction
-    results = model.predict(img_path,conf=0.25)
+    results = model.predict(img_path,conf=0.15)
     
     # Debugging: print the results
     print(f"Predictions for {img_path}:")
-    for result in results:
-        print(result)
+    #for result in results:
+    #    print(result)
 
     # Load the image
     img = cv2.imread(img_path)
