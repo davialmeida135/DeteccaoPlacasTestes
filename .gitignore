@@ -2,3 +2,6 @@
 data
 Characters_South_America.v2i.yolov9
 *.zip
+*.pyc
+/TrabalhoDeepLearning/dataset
+TrabalhoDeepLearning/best_model.pth
